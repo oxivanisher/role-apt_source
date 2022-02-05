@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+deb {{ apt_source.mirror }} jessie main non-free contrib
+deb-src {{ apt_source.mirror }} jessie main non-free contrib
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+deb-src http://security.debian.org/ jessie/updates main contrib non-free

@@ -1,0 +1,4 @@
+---
+
+apt_source:
+  mirror: "http://mirror.init7.net/debian"
