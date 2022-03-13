@@ -1,2 +1,6 @@
 ---
-# vars file for apt_source
+
+arm_versions:
+  - armv6l
+  - armv7l
+

@@ -37,7 +37,7 @@
     ansible_distribution_release|lower == "bullseye" and
     ansible_architecture|lower == "x86_64"
 
-## armv7l (aka raspberry pis)
+## armv6l/armv7l (aka raspberry pis)
 # debian buster
 - name: configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
@@ -46,7 +46,7 @@
   when:
     ansible_distribution|lower == "debian" and
     ansible_distribution_release|lower == "buster" and
-    ansible_architecture|lower == "armv7l"
+    ansible_architecture|lower in arm_versions
 
 # debian bullseye
 - name: configuring /etc/apt/sources.list for debian bullseye on armv7l
@@ -56,7 +56,7 @@
   when:
     ansible_distribution|lower == "debian" and
     ansible_distribution_release|lower == "bullseye" and
-    ansible_architecture|lower == "armv7l"
+    ansible_architecture|lower in arm_versions
 
 # xbian stretch
 - name: configuring /etc/apt/sources.list for xbian stretch on armv7l
@@ -64,7 +64,7 @@
     sources_filename: xbian-stretch.jinja2
   when:
     ansible_distribution|lower == "xbian" and
-    ansible_architecture|lower == "armv7l"
+    ansible_architecture|lower in arm_versions
 
 # writing the apt sources files from variable above
 - name: "writing /etc/apt/sources.list from {{ sources_filename }}"
