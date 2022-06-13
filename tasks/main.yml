@@ -88,4 +88,3 @@
   notify: updating sources
   when: raspi_sources_filename is defined
   ignore_errors: true
-
