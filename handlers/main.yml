@@ -1,5 +1,5 @@
 ---
 
-- name: updating sources
+- name: Updating sources
   ansible.builtin.apt:
     update_cache: true

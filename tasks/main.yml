@@ -2,7 +2,7 @@
 
 ## x86_64
 # debian jessie
-- name: configuring /etc/apt/sources.list for debian jessie on x86_64
+- name: Configuring /etc/apt/sources.list for debian jessie on x86_64
   ansible.builtin.set_fact:
     sources_filename: jessie.jinja2
   when:
@@ -11,7 +11,7 @@
     ansible_architecture|lower == "x86_64"
 
 # debian stretch
-- name: configuring /etc/apt/sources.list for debian stretch on x86_64
+- name: Configuring /etc/apt/sources.list for debian stretch on x86_64
   ansible.builtin.set_fact:
     sources_filename: stretch.jinja2
   when:
@@ -20,7 +20,7 @@
     ansible_architecture|lower == "x86_64"
 
 # debian buster
-- name: configuring /etc/apt/sources.list for debian buster on x86_64
+- name: Configuring /etc/apt/sources.list for debian buster on x86_64
   ansible.builtin.set_fact:
     sources_filename: buster.jinja2
   when:
@@ -29,7 +29,7 @@
     ansible_architecture|lower == "x86_64"
 
 # debian bullseye
-- name: configuring /etc/apt/sources.list for debian bullseye on x86_64
+- name: Configuring /etc/apt/sources.list for debian bullseye on x86_64
   ansible.builtin.set_fact:
     sources_filename: bullseye.jinja2
   when:
@@ -39,7 +39,7 @@
 
 ## armv6l/armv7l (aka raspberry pis)
 # debian buster
-- name: configuring /etc/apt/sources.list for debian buster on armv7l
+- name: Configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-buster.jinja2
     raspi_sources_filename: raspian-buster-raspi.list.jinja2
@@ -49,7 +49,7 @@
     ansible_architecture|lower in arm_versions
 
 # debian bullseye
-- name: configuring /etc/apt/sources.list for debian bullseye on armv7l
+- name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-bullseye.jinja2
     raspi_sources_filename: raspian-bullseye-raspi.list.jinja2
@@ -59,7 +59,7 @@
     ansible_architecture|lower in arm_versions
 
 # xbian stretch
-- name: configuring /etc/apt/sources.list for xbian stretch on armv7l
+- name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
   ansible.builtin.set_fact:
     sources_filename: xbian-stretch.jinja2
   when:
@@ -67,24 +67,24 @@
     ansible_architecture|lower in arm_versions
 
 # writing the apt sources files from variable above
-- name: "writing /etc/apt/sources.list from {{ sources_filename }}"
+- name: "Writing /etc/apt/sources.list from {{ sources_filename }}"
   ansible.builtin.template:
     src: "{{ sources_filename }}"
     dest: /etc/apt/sources.list
     owner: root
     group: root
     mode: 0644
-  notify: updating sources
+  notify: Updating sources
   when: sources_filename is defined
   ignore_errors: true
 
-- name: "writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename }}"
+- name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename }}"
   ansible.builtin.template:
     src: "{{ raspi_sources_filename }}"
     dest: /etc/apt/sources.list.d/raspi.list
     owner: root
     group: root
     mode: 0644
-  notify: updating sources
+  notify: Updating sources
   when: raspi_sources_filename is defined
   ignore_errors: true
