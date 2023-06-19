@@ -59,6 +59,15 @@
     ansible_distribution_release|lower == "bullseye" and
     ansible_architecture|lower in arm_versions
 
+# debian bookworm
+- name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
+  ansible.builtin.set_fact:
+    sources_filename: raspian-bookworm.jinja2
+    raspi_sources_filename: raspian-bookworm-raspi.list.jinja2
+  when: ansible_distribution|lower == "debian" and
+    ansible_distribution_release|lower == "bookworm" and
+    ansible_architecture|lower in arm_versions
+
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
   ansible.builtin.set_fact:
