@@ -91,7 +91,7 @@
     sources_filename: jammy.jinja2
   when:
     - ansible_distribution|lower == "ubuntu"
-    - ansible_distribution_release|lower == "jammy""
+    - ansible_distribution_release|lower == "jammy"
     - ansible_architecture|lower == "x86_64"
 
 # writing the apt sources files from variable above
