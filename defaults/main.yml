@@ -1,4 +1,6 @@
 ---
-
-apt_source:
+apt_debian_source:
   mirror: "http://mirror.init7.net/debian"
+
+apt_ubuntu_source:
+  mirror: "http://mirror.init7.net/ubuntu"

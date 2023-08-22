@@ -75,6 +75,15 @@
   when: ansible_distribution|lower == "xbian" and
     ansible_architecture|lower in arm_versions
 
+## x86_64
+# ubuntu jammy
+- name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
+  ansible.builtin.set_fact:
+    sources_filename: jammy.jinja2
+  when: ansible_distribution|lower == "ubuntu" and
+    ansible_distribution_release|lower == "jammy"" and
+    ansible_architecture|lower == "x86_64"
+
 # writing the apt sources files from variable above
 - name: "Writing /etc/apt/sources.list from {{ sources_filename }}"
   ansible.builtin.template:
