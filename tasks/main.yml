@@ -8,6 +8,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "jessie"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 # debian stretch
 - name: Configuring /etc/apt/sources.list for debian stretch on x86_64
@@ -17,6 +19,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "stretch"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on x86_64
@@ -26,6 +30,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "buster"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on x86_64
@@ -35,6 +41,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bullseye"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on x86_64
@@ -44,6 +52,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bookworm"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 ## armv6l/armv7l (aka raspberry pis)
 # debian buster
@@ -55,6 +65,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "buster"
     - ansible_architecture|lower in arm_versions
+  become: true
+  become_user: root
 
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
@@ -65,6 +77,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bullseye"
     - ansible_architecture|lower in arm_versions
+  become: true
+  become_user: root
 
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
@@ -75,6 +89,8 @@
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bookworm"
     - ansible_architecture|lower in arm_versions
+  become: true
+  become_user: root
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
@@ -83,6 +99,8 @@
   when:
     - ansible_distribution|lower == "xbian"
     - ansible_architecture|lower in arm_versions
+  become: true
+  become_user: root
 
 ## x86_64
 # ubuntu jammy
@@ -93,6 +111,8 @@
     - ansible_distribution|lower == "ubuntu"
     - ansible_distribution_release|lower == "jammy"
     - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
 
 # writing the apt sources files from variable above
 - name: "Writing /etc/apt/sources.list from {{ sources_filename }}"
@@ -104,6 +124,8 @@
     mode: "0644"
   notify: Updating sources
   when: sources_filename is defined
+  become: true
+  become_user: root
 
 - name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename }}"
   ansible.builtin.template:
@@ -114,3 +136,5 @@
     mode: "0644"
   notify: Updating sources
   when: raspi_sources_filename is defined
+  become: true
+  become_user: root
