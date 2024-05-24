@@ -1,11 +1,11 @@
 # {{ ansible_managed }}
 
-deb {{ apt_debian_source.mirror }} buster main non-free contrib
-deb-src {{ apt_debian_source.mirror }} buster main non-free contrib
+deb {{ apt_debian_source_mirror }} buster main non-free contrib
+deb-src {{ apt_debian_source_mirror }} buster main non-free contrib
 
 deb http://security.debian.org/ buster/updates main non-free contrib
 deb-src http://security.debian.org/ buster/updates main non-free contrib
 
 # buster-updates, previously known as 'volatile'
-deb {{ apt_debian_source.mirror }} buster-updates main non-free contrib
-deb-src {{ apt_debian_source.mirror }} buster-updates main non-free contrib
+deb {{ apt_debian_source_mirror }} buster-updates main non-free contrib
+deb-src {{ apt_debian_source_mirror }} buster-updates main non-free contrib

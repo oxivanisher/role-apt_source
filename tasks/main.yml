@@ -4,6 +4,7 @@
 - name: Configuring /etc/apt/sources.list for debian jessie on x86_64
   ansible.builtin.set_fact:
     sources_filename: jessie.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "jessie"
@@ -15,6 +16,7 @@
 - name: Configuring /etc/apt/sources.list for debian stretch on x86_64
   ansible.builtin.set_fact:
     sources_filename: stretch.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "stretch"
@@ -26,6 +28,7 @@
 - name: Configuring /etc/apt/sources.list for debian buster on x86_64
   ansible.builtin.set_fact:
     sources_filename: buster.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "buster"
@@ -37,6 +40,7 @@
 - name: Configuring /etc/apt/sources.list for debian bullseye on x86_64
   ansible.builtin.set_fact:
     sources_filename: bullseye.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bullseye"
@@ -48,6 +52,7 @@
 - name: Configuring /etc/apt/sources.list for debian bookworm on x86_64
   ansible.builtin.set_fact:
     sources_filename: bookworm.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bookworm"
@@ -60,7 +65,9 @@
 - name: Configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-buster.jinja2
+    sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-buster-raspi.list.jinja2
+    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "buster"
@@ -72,6 +79,7 @@
 - name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-bullseye.jinja2
+    sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bullseye-raspi.list.jinja2
   when:
     - ansible_distribution|lower == "debian"
@@ -84,6 +92,7 @@
 - name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-bookworm.jinja2
+    sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bookworm-raspi.list.jinja2
   when:
     - ansible_distribution|lower == "debian"
@@ -96,6 +105,7 @@
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
   ansible.builtin.set_fact:
     sources_filename: xbian-stretch.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "xbian"
     - ansible_architecture|lower in arm_versions
@@ -107,9 +117,34 @@
 - name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
   ansible.builtin.set_fact:
     sources_filename: jammy.jinja2
+    sources_dest: /etc/apt/sources.list
   when:
     - ansible_distribution|lower == "ubuntu"
     - ansible_distribution_release|lower == "jammy"
+    - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
+
+# ubuntu jammy
+- name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
+  ansible.builtin.set_fact:
+    sources_filename: jammy.jinja2
+    sources_dest: /etc/apt/sources.list
+  when:
+    - ansible_distribution|lower == "ubuntu"
+    - ansible_distribution_release|lower == "jammy"
+    - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
+
+# ubuntu noble
+- name: Configuring /etc/apt/sources.list.d/ubuntu.sources for ubuntu jammy on x86_64
+  ansible.builtin.set_fact:
+    sources_filename: noble.jinja2
+    sources_dest: /etc/apt/sources.list.d/ubuntu.sources
+  when:
+    - ansible_distribution|lower == "ubuntu"
+    - ansible_distribution_release|lower == "noble"
     - ansible_architecture|lower == "x86_64"
   become: true
   become_user: root
@@ -118,7 +153,7 @@
 - name: "Writing /etc/apt/sources.list from {{ sources_filename }}"
   ansible.builtin.template:
     src: "{{ sources_filename }}"
-    dest: /etc/apt/sources.list
+    dest: "{{ sources_dest }}"
     owner: root
     group: root
     mode: "0644"
@@ -130,7 +165,7 @@
 - name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename }}"
   ansible.builtin.template:
     src: "{{ raspi_sources_filename }}"
-    dest: /etc/apt/sources.list.d/raspi.list
+    dest: "{{ raspi_sources_dest }}"
     owner: root
     group: root
     mode: "0644"
