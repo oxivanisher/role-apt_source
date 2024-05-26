@@ -81,6 +81,7 @@
     sources_filename: raspian-bullseye.jinja2
     sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bullseye-raspi.list.jinja2
+    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bullseye"
@@ -94,6 +95,7 @@
     sources_filename: raspian-bookworm.jinja2
     sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bookworm-raspi.list.jinja2
+    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "bookworm"
