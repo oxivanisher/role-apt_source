@@ -1,11 +1,11 @@
 # {{ ansible_managed }}
 
-deb {{ apt_debian_source_mirror }} bullseye main non-free contrib
-deb-src {{ apt_debian_source_mirror }} bullseye main non-free contrib
+deb {{ apt_source_debian_source_mirror }} bullseye main non-free contrib
+deb-src {{ apt_source_debian_source_mirror }} bullseye main non-free contrib
 
 deb http://security.debian.org/ bullseye-security main non-free contrib
 deb-src http://security.debian.org/ bullseye-security main non-free contrib
 
 # bullseye-updates, previously known as 'volatile'
-deb {{ apt_debian_source_mirror }} bullseye-updates main non-free contrib
-deb-src {{ apt_debian_source_mirror }} bullseye-updates main non-free contrib
+deb {{ apt_source_debian_source_mirror }} bullseye-updates main non-free contrib
+deb-src {{ apt_source_debian_source_mirror }} bullseye-updates main non-free contrib
