@@ -1,5 +1,6 @@
 apt_source
 ==========
+[![Ansible Lint](https://github.com/oxivanisher/role-apt_source/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/oxivanisher/role-apt_source/actions/workflows/ansible-lint.yml)
 
 This role configures the mirror for apt sources for Debian and Ubuntu based systems on x86 and also arm for Raspberry Pi.
 
