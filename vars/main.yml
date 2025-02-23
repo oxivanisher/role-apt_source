@@ -2,3 +2,4 @@
 apt_source_arm_versions:
   - armv6l
   - armv7l
+  - aarch64
