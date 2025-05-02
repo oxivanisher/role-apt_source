@@ -140,7 +140,7 @@
   become_user: root
 
 # ubuntu noble
-- name: Configuring /etc/apt/sources.list.d/ubuntu.sources for ubuntu jammy on x86_64
+- name: Configuring /etc/apt/sources.list.d/ubuntu.sources for ubuntu noble on x86_64
   ansible.builtin.set_fact:
     sources_filename: noble.jinja2
     sources_dest: /etc/apt/sources.list.d/ubuntu.sources
