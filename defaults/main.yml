@@ -1,3 +1,4 @@
 ---
 apt_source_debian_source_mirror: "http://mirror.init7.net/debian"
 apt_source_ubuntu_source_mirror: "http://mirror.init7.net/ubuntu"
+apt_source_linuxmint_source_mirror: "http://mirror.init7.net/linuxmint"

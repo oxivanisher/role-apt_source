@@ -60,7 +60,7 @@
   become: true
   become_user: root
 
-## armv6l/armv7l (aka raspberry pis)
+## armv6l/armv7l/aarch64 (aka raspberry pis)
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
@@ -147,6 +147,18 @@
   when:
     - ansible_distribution|lower == "ubuntu"
     - ansible_distribution_release|lower == "noble"
+    - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
+
+# linuxmint xia
+- name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint xia on x86_64
+  ansible.builtin.set_fact:
+    sources_filename: xia.jinja2
+    sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
+  when:
+    - ansible_distribution|lower == "linux mint"
+    - ansible_distribution_release|lower == "xia"
     - ansible_architecture|lower == "x86_64"
   become: true
   become_user: root
