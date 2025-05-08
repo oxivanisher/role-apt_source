@@ -187,3 +187,6 @@
   when: raspi_sources_filename is defined
   become: true
   become_user: root
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
