@@ -60,6 +60,29 @@
   become: true
   become_user: root
 
+# debian trixie
+- name: Configure sources for debian trixie on x86_64
+  when:
+    - ansible_distribution|lower == "debian"
+    - ansible_distribution_release|lower == "trixie"
+    - ansible_architecture|lower == "x86_64"
+  block:
+    - name: Configuring /etc/apt/sources.list for debian trixie on x86_64
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list
+        content: "# Debian sources have moved to /etc/apt/sources.list"
+        owner: root
+        mode: "0644"
+      become: true
+      become_user: root
+
+    - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on x86_64
+      ansible.builtin.set_fact:
+        sources_filename: trixie.jinja2
+        sources_dest: /etc/apt/sources.list.d/debian.sources
+      become: true
+      become_user: root
+
 ## armv6l/armv7l/aarch64 (aka raspberry pis)
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on armv7l
@@ -102,6 +125,21 @@
     - ansible_architecture|lower in apt_source_arm_versions
   become: true
   become_user: root
+
+# debian trixie
+# since debian now switched to deb822, this could be done with a ansible module in the future
+# - name: Configuring /etc/apt/sources.list for debian trixie on armv7l
+#   ansible.builtin.set_fact:
+#     sources_filename: raspian-trixie.jinja2
+#     sources_dest: /etc/apt/sources.list
+#     raspi_sources_filename: raspian-trixie-raspi.list.jinja2
+#     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
+#   when:
+#     - ansible_distribution|lower == "debian"
+#     - ansible_distribution_release|lower == "trixie"
+#     - ansible_architecture|lower in apt_source_arm_versions
+#   become: true
+#   become_user: root
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
@@ -164,7 +202,7 @@
   become_user: root
 
 # writing the apt sources files from variable above
-- name: "Writing /etc/apt/sources.list from {{ sources_filename }}"
+- name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename }}"
   ansible.builtin.template:
     src: "{{ sources_filename }}"
     dest: "{{ sources_dest }}"
