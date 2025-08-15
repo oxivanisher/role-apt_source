@@ -201,6 +201,18 @@
   become: true
   become_user: root
 
+# linuxmint zara
+- name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint zara on x86_64
+  ansible.builtin.set_fact:
+    sources_filename: zara.jinja2
+    sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
+  when:
+    - ansible_distribution|lower == "linux mint"
+    - ansible_distribution_release|lower == "zara"
+    - ansible_architecture|lower == "x86_64"
+  become: true
+  become_user: root
+
 # writing the apt sources files from variable above
 - name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename }}"
   ansible.builtin.template:
