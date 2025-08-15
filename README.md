@@ -7,10 +7,11 @@ This role configures the mirror for apt sources for Debian and Ubuntu based syst
 Role Variables
 --------------
 
-| Name                            | Comment                              | Default value                    |
-|---------------------------------|--------------------------------------|----------------------------------|
-| apt_source_debian_source_mirror | The mirror URL for Debian to be used | `http://mirror.init7.net/debian` |
-| apt_source_ubuntu_source_mirror | The mirror URL for Ubuntu to be used | `http://mirror.init7.net/ubuntu` |
+| Name                               | Comment                                  | Default value                        |
+| ---------------------------------- | ---------------------------------------- | ------------------------------------ |
+| apt_source_debian_source_mirror    | The mirror URL for Debian to be used     | `http://mirror.init7.net/debian`     |
+| apt_source_ubuntu_source_mirror    | The mirror URL for Ubuntu to be used     | `http://mirror.init7.net/ubuntu`     |
+| apt_source_linuxmint_source_mirror | The mirror URL for Linux Mint to be used | `https://mirror.init7.net/linuxmint` |
 
 Dependencies
 ------------
