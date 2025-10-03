@@ -126,20 +126,18 @@
   become: true
   become_user: root
 
-# debian trixie
-# since debian now switched to deb822, this could be done with a ansible module in the future
-# - name: Configuring /etc/apt/sources.list for debian trixie on armv7l
-#   ansible.builtin.set_fact:
-#     sources_filename: raspian-trixie.jinja2
-#     sources_dest: /etc/apt/sources.list
-#     raspi_sources_filename: raspian-trixie-raspi.list.jinja2
-#     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
-#   when:
-#     - ansible_distribution|lower == "debian"
-#     - ansible_distribution_release|lower == "trixie"
-#     - ansible_architecture|lower in apt_source_arm_versions
-#   become: true
-#   become_user: root
+- name: Configuring /etc/apt/sources.list.d/debian.source for debian trixie on armv7l
+  ansible.builtin.set_fact:
+    sources_filename: raspian-trixie.jinja2
+    sources_dest: /etc/apt/sources.list.d/debian.source
+    raspi_sources_filename: raspian-trixie-raspi.sources.jinja2
+    raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
+  when:
+    - ansible_distribution|lower == "debian"
+    - ansible_distribution_release|lower == "trixie"
+    - ansible_architecture|lower in apt_source_arm_versions
+  become: true
+  become_user: root
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
