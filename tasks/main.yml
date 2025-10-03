@@ -126,10 +126,11 @@
   become: true
   become_user: root
 
+# debian trixie
 - name: Configuring /etc/apt/sources.list.d/debian.source for debian trixie on armv7l
   ansible.builtin.set_fact:
     sources_filename: raspian-trixie.jinja2
-    sources_dest: /etc/apt/sources.list.d/debian.source
+    sources_dest: /etc/apt/sources.list.d/debian.sources
     raspi_sources_filename: raspian-trixie-raspi.sources.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
   when:
