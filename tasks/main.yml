@@ -70,7 +70,7 @@
     - name: Configuring /etc/apt/sources.list for debian trixie on x86_64
       ansible.builtin.copy:
         dest: /etc/apt/sources.list
-        content: "# Debian sources have moved to /etc/apt/sources.list"
+        content: "# Debian sources have moved to /etc/apt/sources.list.d/debian.sources"
         owner: root
         mode: "0644"
       become: true
@@ -127,18 +127,29 @@
   become_user: root
 
 # debian trixie
-- name: Configuring /etc/apt/sources.list.d/debian.source for debian trixie on armv7l
-  ansible.builtin.set_fact:
-    sources_filename: raspian-trixie.jinja2
-    sources_dest: /etc/apt/sources.list.d/debian.sources
-    raspi_sources_filename: raspian-trixie-raspi.sources.jinja2
-    raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
+- name: Configure sources for debian trixie on arm
   when:
     - ansible_distribution|lower == "debian"
     - ansible_distribution_release|lower == "trixie"
     - ansible_architecture|lower in apt_source_arm_versions
-  become: true
-  become_user: root
+  block:
+    - name: Configuring /etc/apt/sources.list for debian trixie on arm
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list
+        content: "# Debian sources have moved to /etc/apt/sources.list.d/debian.sources"
+        owner: root
+        mode: "0644"
+      become: true
+      become_user: root
+
+    - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on arm
+      ansible.builtin.set_fact:
+        sources_filename: raspian-trixie.jinja2
+        sources_dest: /etc/apt/sources.list.d/debian.sources
+        raspi_sources_filename: raspian-trixie-raspi.sources.jinja2
+        raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
+      become: true
+      become_user: root
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
