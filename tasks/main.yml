@@ -142,6 +142,13 @@
       become: true
       become_user: root
 
+    - name: Remove old raspi.list file
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/raspi.list
+        state: absent
+      become: true
+      become_user: root
+
     - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on arm
       ansible.builtin.set_fact:
         sources_filename: raspian-trixie.jinja2
