@@ -87,7 +87,7 @@
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
-    sources_filename: debian-buster.jinja2
+    sources_filename: raspian-buster.jinja2
     sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-buster-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
@@ -101,7 +101,7 @@
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
   ansible.builtin.set_fact:
-    sources_filename: debian-bullseye.jinja2
+    sources_filename: raspian-bullseye.jinja2
     sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bullseye-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
@@ -115,7 +115,7 @@
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
   ansible.builtin.set_fact:
-    sources_filename: debian-bookworm.jinja2
+    sources_filename: raspian-bookworm.jinja2
     sources_dest: /etc/apt/sources.list
     raspi_sources_filename: raspian-bookworm-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
