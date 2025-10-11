@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
 Types: deb
-URIs: https://deb.debian.org/debian
+URIs: {{ apt_source_debian_source_mirror }}
 Suites: trixie trixie-updates
 Components: main contrib non-free non-free-firmware
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
