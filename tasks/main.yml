@@ -6,9 +6,9 @@
     sources_filename: debian-jessie.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "jessie"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "jessie"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -18,9 +18,9 @@
     sources_filename: debian-stretch.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "stretch"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "stretch"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -30,9 +30,9 @@
     sources_filename: debian-buster.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "buster"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "buster"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -42,9 +42,9 @@
     sources_filename: debian-bullseye.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "bullseye"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "bullseye"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -54,18 +54,18 @@
     sources_filename: debian-bookworm.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "bookworm"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "bookworm"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
 # debian trixie
 - name: Configure sources for debian trixie on x86_64
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "trixie"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "trixie"
+    - ansible_facts.architecture|lower == "x86_64"
   block:
     - name: Configuring /etc/apt/sources.list for debian trixie on x86_64
       ansible.builtin.copy:
@@ -92,9 +92,9 @@
     raspi_sources_filename: raspian-buster-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "buster"
-    - ansible_architecture|lower in apt_source_arm_versions
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "buster"
+    - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
   become_user: root
 
@@ -106,9 +106,9 @@
     raspi_sources_filename: raspian-bullseye-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "bullseye"
-    - ansible_architecture|lower in apt_source_arm_versions
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "bullseye"
+    - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
   become_user: root
 
@@ -120,18 +120,18 @@
     raspi_sources_filename: raspian-bookworm-raspi.jinja2
     raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "bookworm"
-    - ansible_architecture|lower in apt_source_arm_versions
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "bookworm"
+    - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
   become_user: root
 
 # debian trixie
 - name: Configure sources for debian trixie on arm
   when:
-    - ansible_distribution|lower == "debian"
-    - ansible_distribution_release|lower == "trixie"
-    - ansible_architecture|lower in apt_source_arm_versions
+    - ansible_facts.distribution|lower == "debian"
+    - ansible_facts.distribution_release|lower == "trixie"
+    - ansible_facts.architecture|lower in apt_source_arm_versions
   block:
     - name: Configuring /etc/apt/sources.list for debian trixie on arm
       ansible.builtin.copy:
@@ -164,8 +164,8 @@
     sources_filename: xbian-debian-stretch.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "xbian"
-    - ansible_architecture|lower in apt_source_arm_versions
+    - ansible_facts.distribution|lower == "xbian"
+    - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
   become_user: root
 
@@ -176,9 +176,9 @@
     sources_filename: ubuntu-jammy.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "ubuntu"
-    - ansible_distribution_release|lower == "jammy"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "ubuntu"
+    - ansible_facts.distribution_release|lower == "jammy"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -188,9 +188,9 @@
     sources_filename: ubuntu-jammy.jinja2
     sources_dest: /etc/apt/sources.list
   when:
-    - ansible_distribution|lower == "ubuntu"
-    - ansible_distribution_release|lower == "jammy"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "ubuntu"
+    - ansible_facts.distribution_release|lower == "jammy"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -200,9 +200,9 @@
     sources_filename: ubuntu-noble.jinja2
     sources_dest: /etc/apt/sources.list.d/ubuntu.sources
   when:
-    - ansible_distribution|lower == "ubuntu"
-    - ansible_distribution_release|lower == "noble"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "ubuntu"
+    - ansible_facts.distribution_release|lower == "noble"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -212,9 +212,9 @@
     sources_filename: mint-xia.jinja2
     sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
   when:
-    - ansible_distribution|lower == "linux mint"
-    - ansible_distribution_release|lower == "xia"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "linux mint"
+    - ansible_facts.distribution_release|lower == "xia"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
@@ -224,9 +224,9 @@
     sources_filename: mint-zara.jinja2
     sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
   when:
-    - ansible_distribution|lower == "linux mint"
-    - ansible_distribution_release|lower == "zara"
-    - ansible_architecture|lower == "x86_64"
+    - ansible_facts.distribution|lower == "linux mint"
+    - ansible_facts.distribution_release|lower == "zara"
+    - ansible_facts.architecture|lower == "x86_64"
   become: true
   become_user: root
 
