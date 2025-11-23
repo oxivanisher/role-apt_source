@@ -231,7 +231,7 @@
   become_user: root
 
 # writing the apt sources files from variable above
-- name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename }}"
+- name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename | default('src file') }}"
   ansible.builtin.template:
     src: "{{ sources_filename }}"
     dest: "{{ sources_dest }}"
@@ -243,7 +243,7 @@
   become: true
   become_user: root
 
-- name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename }}"
+- name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename | default('src file') }}"
   ansible.builtin.template:
     src: "{{ raspi_sources_filename }}"
     dest: "{{ raspi_sources_dest }}"
