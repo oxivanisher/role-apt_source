@@ -10,7 +10,6 @@
     - ansible_facts.distribution_release|lower == "jessie"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # debian stretch
 - name: Configuring /etc/apt/sources.list for debian stretch on x86_64
@@ -22,7 +21,6 @@
     - ansible_facts.distribution_release|lower == "stretch"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on x86_64
@@ -34,7 +32,6 @@
     - ansible_facts.distribution_release|lower == "buster"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on x86_64
@@ -46,7 +43,6 @@
     - ansible_facts.distribution_release|lower == "bullseye"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on x86_64
@@ -58,7 +54,6 @@
     - ansible_facts.distribution_release|lower == "bookworm"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # debian trixie
 - name: Configure sources for debian trixie on x86_64
@@ -74,14 +69,12 @@
         owner: root
         mode: "0644"
       become: true
-      become_user: root
 
     - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on x86_64
       ansible.builtin.set_fact:
         sources_filename: debian-trixie.jinja2
         sources_dest: /etc/apt/sources.list.d/debian.sources
       become: true
-      become_user: root
 
 ## armv6l/armv7l/aarch64 (aka raspberry pis)
 # debian buster
@@ -96,7 +89,6 @@
     - ansible_facts.distribution_release|lower == "buster"
     - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
-  become_user: root
 
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
@@ -110,7 +102,6 @@
     - ansible_facts.distribution_release|lower == "bullseye"
     - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
-  become_user: root
 
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
@@ -124,7 +115,6 @@
     - ansible_facts.distribution_release|lower == "bookworm"
     - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
-  become_user: root
 
 # debian trixie
 - name: Configure sources for debian trixie on arm
@@ -140,14 +130,12 @@
         owner: root
         mode: "0644"
       become: true
-      become_user: root
 
     - name: Remove old raspi.list file
       ansible.builtin.file:
         path: /etc/apt/sources.list.d/raspi.list
         state: absent
       become: true
-      become_user: root
 
     - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on arm
       ansible.builtin.set_fact:
@@ -156,7 +144,6 @@
         raspi_sources_filename: raspian-trixie-raspi.jinja2
         raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
       become: true
-      become_user: root
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
@@ -167,7 +154,6 @@
     - ansible_facts.distribution|lower == "xbian"
     - ansible_facts.architecture|lower in apt_source_arm_versions
   become: true
-  become_user: root
 
 ## x86_64
 # ubuntu jammy
@@ -180,7 +166,6 @@
     - ansible_facts.distribution_release|lower == "jammy"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # ubuntu jammy
 - name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
@@ -192,7 +177,6 @@
     - ansible_facts.distribution_release|lower == "jammy"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # ubuntu noble
 - name: Configuring /etc/apt/sources.list.d/ubuntu.sources for ubuntu noble on x86_64
@@ -204,7 +188,6 @@
     - ansible_facts.distribution_release|lower == "noble"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # linuxmint xia
 - name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint xia on x86_64
@@ -216,7 +199,6 @@
     - ansible_facts.distribution_release|lower == "xia"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # linuxmint zara
 - name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint zara on x86_64
@@ -228,7 +210,6 @@
     - ansible_facts.distribution_release|lower == "zara"
     - ansible_facts.architecture|lower == "x86_64"
   become: true
-  become_user: root
 
 # writing the apt sources files from variable above
 - name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename | default('src file') }}"
@@ -241,7 +222,6 @@
   notify: Updating sources
   when: sources_filename is defined
   become: true
-  become_user: root
 
 - name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename | default('src file') }}"
   ansible.builtin.template:
@@ -253,7 +233,6 @@
   notify: Updating sources
   when: raspi_sources_filename is defined
   become: true
-  become_user: root
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
