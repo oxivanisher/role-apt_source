@@ -3,8 +3,8 @@
 # debian jessie
 - name: Configuring /etc/apt/sources.list for debian jessie on x86_64
   ansible.builtin.set_fact:
-    sources_filename: debian-jessie.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: debian-jessie.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "jessie"
@@ -14,8 +14,8 @@
 # debian stretch
 - name: Configuring /etc/apt/sources.list for debian stretch on x86_64
   ansible.builtin.set_fact:
-    sources_filename: debian-stretch.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: debian-stretch.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "stretch"
@@ -25,8 +25,8 @@
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on x86_64
   ansible.builtin.set_fact:
-    sources_filename: debian-buster.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: debian-buster.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "buster"
@@ -36,8 +36,8 @@
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on x86_64
   ansible.builtin.set_fact:
-    sources_filename: debian-bullseye.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: debian-bullseye.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "bullseye"
@@ -47,8 +47,8 @@
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on x86_64
   ansible.builtin.set_fact:
-    sources_filename: debian-bookworm.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: debian-bookworm.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "bookworm"
@@ -72,18 +72,18 @@
 
     - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on x86_64
       ansible.builtin.set_fact:
-        sources_filename: debian-trixie.jinja2
-        sources_dest: /etc/apt/sources.list.d/debian.sources
+        apt_source_sources_filename: debian-trixie.jinja2
+        apt_source_sources_dest: /etc/apt/sources.list.d/debian.sources
       become: true
 
 ## armv6l/armv7l/aarch64 (aka raspberry pis)
 # debian buster
 - name: Configuring /etc/apt/sources.list for debian buster on armv7l
   ansible.builtin.set_fact:
-    sources_filename: raspian-buster.jinja2
-    sources_dest: /etc/apt/sources.list
-    raspi_sources_filename: raspian-buster-raspi.jinja2
-    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
+    apt_source_sources_filename: raspian-buster.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
+    apt_source_raspi_sources_filename: raspian-buster-raspi.jinja2
+    apt_source_raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "buster"
@@ -93,10 +93,10 @@
 # debian bullseye
 - name: Configuring /etc/apt/sources.list for debian bullseye on armv7l
   ansible.builtin.set_fact:
-    sources_filename: raspian-bullseye.jinja2
-    sources_dest: /etc/apt/sources.list
-    raspi_sources_filename: raspian-bullseye-raspi.jinja2
-    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
+    apt_source_sources_filename: raspian-bullseye.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
+    apt_source_raspi_sources_filename: raspian-bullseye-raspi.jinja2
+    apt_source_raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "bullseye"
@@ -106,10 +106,10 @@
 # debian bookworm
 - name: Configuring /etc/apt/sources.list for debian bookworm on armv7l
   ansible.builtin.set_fact:
-    sources_filename: raspian-bookworm.jinja2
-    sources_dest: /etc/apt/sources.list
-    raspi_sources_filename: raspian-bookworm-raspi.jinja2
-    raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
+    apt_source_sources_filename: raspian-bookworm.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
+    apt_source_raspi_sources_filename: raspian-bookworm-raspi.jinja2
+    apt_source_raspi_sources_dest: /etc/apt/sources.list.d/raspi.list
   when:
     - ansible_facts.distribution|lower == "debian"
     - ansible_facts.distribution_release|lower == "bookworm"
@@ -139,17 +139,17 @@
 
     - name: Configuring /etc/apt/sources.list.d/debian.sources for debian trixie on arm
       ansible.builtin.set_fact:
-        sources_filename: raspian-trixie.jinja2
-        sources_dest: /etc/apt/sources.list.d/debian.sources
-        raspi_sources_filename: raspian-trixie-raspi.jinja2
-        raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
+        apt_source_sources_filename: raspian-trixie.jinja2
+        apt_source_sources_dest: /etc/apt/sources.list.d/debian.sources
+        apt_source_raspi_sources_filename: raspian-trixie-raspi.jinja2
+        apt_source_raspi_sources_dest: /etc/apt/sources.list.d/raspi.sources
       become: true
 
 # xbian stretch
 - name: Configuring /etc/apt/sources.list for xbian stretch on armv7l
   ansible.builtin.set_fact:
-    sources_filename: xbian-debian-stretch.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: xbian-debian-stretch.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "xbian"
     - ansible_facts.architecture|lower in apt_source_arm_versions
@@ -159,8 +159,8 @@
 # ubuntu jammy
 - name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
   ansible.builtin.set_fact:
-    sources_filename: ubuntu-jammy.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: ubuntu-jammy.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "ubuntu"
     - ansible_facts.distribution_release|lower == "jammy"
@@ -170,8 +170,8 @@
 # ubuntu jammy
 - name: Configuring /etc/apt/sources.list for ubuntu jammy on x86_64
   ansible.builtin.set_fact:
-    sources_filename: ubuntu-jammy.jinja2
-    sources_dest: /etc/apt/sources.list
+    apt_source_sources_filename: ubuntu-jammy.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list
   when:
     - ansible_facts.distribution|lower == "ubuntu"
     - ansible_facts.distribution_release|lower == "jammy"
@@ -181,8 +181,8 @@
 # ubuntu noble
 - name: Configuring /etc/apt/sources.list.d/ubuntu.sources for ubuntu noble on x86_64
   ansible.builtin.set_fact:
-    sources_filename: ubuntu-noble.jinja2
-    sources_dest: /etc/apt/sources.list.d/ubuntu.sources
+    apt_source_sources_filename: ubuntu-noble.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list.d/ubuntu.sources
   when:
     - ansible_facts.distribution|lower == "ubuntu"
     - ansible_facts.distribution_release|lower == "noble"
@@ -192,8 +192,8 @@
 # linuxmint xia
 - name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint xia on x86_64
   ansible.builtin.set_fact:
-    sources_filename: mint-xia.jinja2
-    sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
+    apt_source_sources_filename: mint-xia.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
   when:
     - ansible_facts.distribution|lower == "linux mint"
     - ansible_facts.distribution_release|lower == "xia"
@@ -203,8 +203,8 @@
 # linuxmint zara
 - name: Configuring /etc/apt/sources.list.d/official-package-repositories.list for Linux Mint zara on x86_64
   ansible.builtin.set_fact:
-    sources_filename: mint-zara.jinja2
-    sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
+    apt_source_sources_filename: mint-zara.jinja2
+    apt_source_sources_dest: /etc/apt/sources.list.d/official-package-repositories.list
   when:
     - ansible_facts.distribution|lower == "linux mint"
     - ansible_facts.distribution_release|lower == "zara"
@@ -212,26 +212,26 @@
   become: true
 
 # writing the apt sources files from variable above
-- name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ sources_filename | default('src file') }}"
+- name: "Writing /etc/apt/sources.list or /etc/apt/sources.list.d/debian.sources from {{ apt_source_sources_filename | default('src file') }}"
   ansible.builtin.template:
-    src: "{{ sources_filename }}"
-    dest: "{{ sources_dest }}"
+    src: "{{ apt_source_sources_filename }}"
+    dest: "{{ apt_source_sources_dest }}"
     owner: root
     group: root
     mode: "0644"
   notify: Updating sources
-  when: sources_filename is defined
+  when: apt_source_sources_filename is defined
   become: true
 
-- name: "Writing /etc/apt/sources.list.d/raspi.list from {{ raspi_sources_filename | default('src file') }}"
+- name: "Writing /etc/apt/sources.list.d/raspi.list from {{ apt_source_raspi_sources_filename | default('src file') }}"
   ansible.builtin.template:
-    src: "{{ raspi_sources_filename }}"
-    dest: "{{ raspi_sources_dest }}"
+    src: "{{ apt_source_raspi_sources_filename }}"
+    dest: "{{ apt_source_raspi_sources_dest }}"
     owner: root
     group: root
     mode: "0644"
   notify: Updating sources
-  when: raspi_sources_filename is defined
+  when: apt_source_raspi_sources_filename is defined
   become: true
 
 - name: Flush handlers
